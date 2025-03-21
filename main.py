@@ -2,6 +2,7 @@
 from flask import Flask, render_template,request, redirect
 # Podłączenie biblioteki bazy danych
 from flask_sqlalchemy import SQLAlchemy
+from transcription import speech
 
 
 app = Flask(__name__)
@@ -11,6 +12,7 @@ app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 # Tworzenie bazy danych
 db = SQLAlchemy(app)
 # Tworzenie tabeli
+
 
 class Card(db.Model):
     # Tworzenie kolumn
@@ -93,6 +95,11 @@ def card(id):
 def create():
     return render_template('create_card.html')
 
+@app.route('/transcibe')
+def transcription():
+    transcibed_text = speech()
+    return render_template('create_card.html', text=transcibed_text)
+
 # Formularz zgłoszeniowy
 @app.route('/form_create', methods=['GET','POST'])
 def form_create():
@@ -109,9 +116,6 @@ def form_create():
         return redirect('/index')
     else:
         return render_template('create_card.html')
-
-
-
 
 
 if __name__ == "__main__":

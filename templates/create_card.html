@@ -31,9 +31,10 @@
                     </label>
                 </div>
                 <label for="text">
-                    <textarea class="form__text" name="text" id="text" cols="30" rows="10" required placeholder="Wpisz jakiś tekst..."></textarea>
+                    <textarea class="form__text" name="text" id="text" cols="30" rows="10" required placeholder="Wpisz jakiś tekst...">{{text}}</textarea>
                 </label>
                 <button class="form__button">Stwórz</button>
+                <a href="{{url_for('transcription')}}" class="form__button">Nagraj</a>
             </div>
         </form>
         {% endblock %}
